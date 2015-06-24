@@ -1,5 +1,8 @@
 package net.xcodersteam.lemoprint;
 
+import com.github.mraa4j.GPIO;
+import com.github.mraa4j.SPI;
+import com.github.mraa4j.enums.GPIODirT;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -32,7 +35,24 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         long d=System.currentTimeMillis();
-       
+        new Thread(()->{
+            try {
+                GPIO gpio = new GPIO(13);
+                gpio.setDirection(GPIODirT.MRAA_GPIO_OUT);
+
+                while (true) {
+                    gpio.write(1);
+                    Thread.sleep(500);
+                    gpio.write(0);
+                    Thread.sleep(500);
+                }
+            }
+            catch (Exception e){
+                log.error(e);
+            }
+
+        }).start();
+
         System.out.println("Wake up, NEO!");
 
         Reflections reflections = new Reflections(ClasspathHelper.forPackage("net.xcodersteam.lemoprint"),

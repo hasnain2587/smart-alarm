@@ -35,6 +35,7 @@ project(":core") {
     dependencies {
         compile project(":api")
         compile project(":web")
+        compile files('lib/galileo-lib')
         compile 'org.reflections:reflections:0.9.9'
         compile 'io.netty:netty-all:5.0.0.Alpha2'
         compile 'commons-logging:commons-logging:1.2'
