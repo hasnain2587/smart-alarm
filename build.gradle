@@ -1,0 +1,57 @@
+
+allprojects {
+    apply plugin: "eclipse"
+    apply plugin: "idea"
+    
+    version = '1.0'
+    ext {
+        appName = 'LemoPrint'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+project(":web") {
+    apply plugin: "java"
+    sourceCompatibility = 1.8
+
+    dependencies {
+        compile project(":api")
+        compile 'io.netty:netty-all:5.0.0.Alpha2'
+        compile 'commons-logging:commons-logging:1.2'
+    }
+}
+
+project(":core") {
+    apply plugin: "java"
+    sourceCompatibility = 1.8
+
+    dependencies {
+        compile project(":api")
+        compile project(":web")
+        compile 'org.reflections:reflections:0.9.9'
+        compile 'io.netty:netty-all:5.0.0.Alpha2'
+        compile 'commons-logging:commons-logging:1.2'
+    }
+}
+
+project(":api") {
+    apply plugin: "java"
+    sourceCompatibility = 1.8
+
+    dependencies {
+        compile 'org.codehaus.janino:janino:2.7.8'
+        compile 'org.reflections:reflections:0.9.9'
+        compile 'io.netty:netty-all:5.0.0.Alpha2'
+        compile 'commons-logging:commons-logging:1.2'
+        compile 'com.googlecode.json-simple:json-simple:1.1.1'
+    }
+}
+
+
+tasks.eclipse.doLast {
+    delete ".project"
+}

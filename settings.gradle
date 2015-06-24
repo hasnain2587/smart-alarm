@@ -1,0 +1,2 @@
+rootProject.name = 'LemoPrint'
+include 'web','core','api'
