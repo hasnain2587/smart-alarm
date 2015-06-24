@@ -35,11 +35,11 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         long d=System.currentTimeMillis();
+        new DreamPhaseDetector().start();
         new Thread(()->{
             try {
                 GPIO gpio = new GPIO(13);
                 gpio.setDirection(GPIODirT.MRAA_GPIO_OUT);
-
                 while (true) {
                     gpio.write(1);
                     Thread.sleep(500);
