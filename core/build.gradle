@@ -38,7 +38,7 @@ task deployG( dependsOn: 'distZip') <<{
         session(remotes.galileo) {
             execute './clean.sh'
             put from: 'core/build/distributions/'+project.name+'-'+project.version+'.zip', into: 'core.zip'
-            execute './post-put.sh '+project.name+' '+project.version
+            //execute './post-put.sh '+project.name+' '+project.version
         }
     }
 }

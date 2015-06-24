@@ -9,22 +9,24 @@ import com.github.mraa4j.enums.GPIODirT;
  */
 public class DreamPhaseDetector extends Thread{
     GPIO pin;
-
+    GPIO LED;
     public DreamPhaseDetector() {
         try {
             pin = new GPIO(12);
             pin.setDirection(GPIODirT.MRAA_GPIO_IN);
+            LED = new GPIO(13);
+            LED.setDirection(GPIODirT.MRAA_GPIO_OUT);
         } catch (MraaException e) {
             e.printStackTrace();
         }
         new Thread(()->{
             try {
                 while (true) {
-                    if(count>2){
+
                         System.out.println(count);
                         count=0;
-                    }
-                    Thread.sleep(60000);
+
+                    Thread.sleep(10000);
                 }
             } catch (Exception e){
                 e.printStackTrace();
@@ -38,6 +40,7 @@ public class DreamPhaseDetector extends Thread{
         try {
             while (true) {
                 int sensor_state = pin.read();
+                LED.write(sensor_state);
                 //System.out.println(sensor_state);
                 count+=sensor_state;
                 Thread.sleep(1);

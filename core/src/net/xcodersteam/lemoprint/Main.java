@@ -36,22 +36,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         long d=System.currentTimeMillis();
         new DreamPhaseDetector().start();
-        new Thread(()->{
-            try {
-                GPIO gpio = new GPIO(13);
-                gpio.setDirection(GPIODirT.MRAA_GPIO_OUT);
-                while (true) {
-                    gpio.write(1);
-                    Thread.sleep(500);
-                    gpio.write(0);
-                    Thread.sleep(500);
-                }
-            }
-            catch (Exception e){
-                log.error(e);
-            }
-
-        }).start();
+        new Thread(new TimeController()).start();
 
         System.out.println("Wake up, NEO!");
 
