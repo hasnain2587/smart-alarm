@@ -25,7 +25,7 @@ public class TimeController implements Runnable {
         try {
             data = new GPIO(9);
             data.setDirection(GPIODirT.MRAA_GPIO_OUT);
-            latches=new GPIO[]{new GPIO(8),new GPIO(7),new GPIO(6),new GPIO(5)};
+            latches = new GPIO[]{new GPIO(5),new GPIO(6),new GPIO(7),new GPIO(8)};
             for(GPIO gpio:latches)
                 gpio.setDirection(GPIODirT.MRAA_GPIO_OUT);
             clock = new GPIO(10);
@@ -39,7 +39,7 @@ public class TimeController implements Runnable {
 
     }
 
-    private final static char mask = 0b10000000;
+    private final static int mask = 0b00000001 << 31;
     public void sendData(int b) throws MraaException, InterruptedException {
         for (int z=0;z<4;z++) {
             for (int i = 0; i < 8; i++) {

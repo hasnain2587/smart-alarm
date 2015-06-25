@@ -4,12 +4,17 @@ import com.github.mraa4j.GPIO;
 import com.github.mraa4j.MraaException;
 import com.github.mraa4j.enums.GPIODirT;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by 1 on 24.06.2015.
  */
 public class DreamPhaseDetector extends Thread{
     GPIO pin;
     GPIO LED;
+    List<DreamPhase> phases=new LinkedList<>();
+    DreamPhase currentPhase=new DreamPhase();
     public DreamPhaseDetector() {
         try {
             pin = new GPIO(12);
@@ -23,10 +28,17 @@ public class DreamPhaseDetector extends Thread{
             try {
                 while (true) {
 
+                    boolean isDeep=(count<1000);
+                    if(currentPhase.deep_phase!=isDeep){
+                        currentPhase.end=System.currentTimeMillis();
+                        phases.add(currentPhase);
+                        currentPhase=new DreamPhase();
+                        currentPhase.deep_phase=isDeep;
+                    }
                         System.out.println(count);
                         count=0;
 
-                    Thread.sleep(10000);
+                    Thread.sleep(60000);
                 }
             } catch (Exception e){
                 e.printStackTrace();
