@@ -10,6 +10,7 @@ public class PageDef {
        // DynamicPage.addDynamicPage("^/[\\w.]+\\.jhtml$");
         DynamicPage.addDynamicPage("^/$");
         DynamicPage.addDynamicPage("^/index.html$");
+
         StaticPage.addStaticPage("^/[\\w.]*$");
     }
 }

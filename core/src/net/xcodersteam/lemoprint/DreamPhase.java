@@ -16,13 +16,6 @@ public class DreamPhase {
     public DreamPhase(){
 
         start=System.currentTimeMillis();
-       // for(int i = 0; i < array.length; i++)
-        //{
-          //  if(array[i] > 500)
-           //     phase++;
-       // }
-        //if(phase > 2)
-          //  deep_phase = false;
     }
 }
 
