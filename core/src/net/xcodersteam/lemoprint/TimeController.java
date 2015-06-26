@@ -72,11 +72,12 @@ public class TimeController implements Runnable {
                 int newtime=number[str.charAt(0)-0x30] | number[str.charAt(1)-0x30] << 8 | number[str.charAt(2)-0x30]<<16 | number[str.charAt(3) - 0x30]<<24;
                 if(time!=newtime) {
                     sendData(newtime);
+                    System.out.println(str);
                     time=newtime;
                 }
 
                 point.write(d.getSeconds()%2==0?1:0);
-                System.out.println(str);
+
                 Thread.sleep(100);
 
             } catch (MraaException e) {

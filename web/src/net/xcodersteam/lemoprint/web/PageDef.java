@@ -12,5 +12,6 @@ public class PageDef {
         DynamicPage.addDynamicPage("^/index.html$");
 
         StaticPage.addStaticPage("^/[\\w.]*$");
+        StaticPage.addStaticPage("^/js/[\\w.]*$");
     }
 }
