@@ -1,1 +1,37 @@
-<html><head><meta charset="UTF-8" /></head><body>Set alarm:<input type="time" name="alarm"/><input type="button" onclick=""></body></html>
+<?j
+import java.util.TimeZone;
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+
+  <title>Smart Alarm</title>
+  <meta name="description" content="A lightweight, customizable jQuery timepicker plugin inspired by Google Calendar. Add a user-friendly javascript timepicker dropdown to your app in minutes." />
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <script type="text/javascript" src="jquery.timepicker.js"></script>
+  <link rel="stylesheet" type="text/css" href="jquery.timepicker.css" />
+
+  <script type="text/javascript" src="jqClock.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="jqClock.css" />
+
+</head>
+
+<body>
+
+	<div id="clock" class = "jqclock"><input type="button">Обновить</input></div>
+    <div class="jqclock">
+        <h2>Будильник</h2>
+        <input id="alarm" type="text" class="time clocktime" style="text-align:center" data-scroll-default="6:00am" />
+    </div>
+	<script>
+        $(function() {
+			$('#alarm').timepicker({ 'timeFormat': 'H:i' });
+			$("#clock").clock({"langSet":"ru","timestamp":<?j= (System.currentTimeMillis()) ?>});
+        });
+    </script>
+	
+</body>
+</html>

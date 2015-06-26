@@ -23,6 +23,7 @@ import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ClasspathHelper;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by semoro on 23.04.15.
@@ -37,7 +38,7 @@ public class Main {
         long d=System.currentTimeMillis();
         new DreamPhaseDetector().start();
         new Thread(new TimeController()).start();
-
+        updateTime();
         System.out.println("Wake up, NEO!");
 
         Reflections reflections = new Reflections(ClasspathHelper.forPackage("net.xcodersteam.lemoprint"),
@@ -81,7 +82,7 @@ public class Main {
                     .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
 
             // Bind and start to accept incoming connections.
-            f = b.bind(8080).sync(); // (7)
+            f = b.bind(80).sync(); // (7)
 
             log.info("Server started up. In "+(System.currentTimeMillis()-d)+"ms");
             // Wait until the server socket is closed.
@@ -91,4 +92,14 @@ public class Main {
             log.info("Socket IO shutdown");
     }
 
+    public static void updateTime(){
+        Runtime r=Runtime.getRuntime();
+        try {
+            r.exec("rdate -s time.nist.gov");
+            r.exec("hwclock -w");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

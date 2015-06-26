@@ -35,8 +35,8 @@ public class DynamicPage implements IPageHandler {
 
         pgp=new PageGenProcessor(new Class[]{FullHttpRequest.class},new String[]{"request"});
         pgp.on=new File(Globals.mainDirectory,"/static/404.html");
-        //pgp.compile();
-        //pgp.gen(new Object[]{null});
+        pgp.compile();
+        pgp.gen(new Object[1]);
     }
 
     public static PageGenProcessor pgp;

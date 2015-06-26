@@ -67,7 +67,7 @@ public class TimeController implements Runnable {
             d.setTime(System.currentTimeMillis());
             dt.setTimeZone(TimeZone.getTimeZone("GMT+3"));
             String str=dt.format(d);
-
+            
             try {
                 int newtime=number[str.charAt(0)-0x30] | number[str.charAt(1)-0x30] << 8 | number[str.charAt(2)-0x30]<<16 | number[str.charAt(3) - 0x30]<<24;
                 if(time!=newtime) {

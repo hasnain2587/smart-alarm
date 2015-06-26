@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.netty.util.CharsetUtil;
 import net.xcodersteam.lemoprint.api.Globals;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -62,10 +63,11 @@ public class PageGenProcessor {
         	}
         	code.append("){");
             FileInputStream br = new FileInputStream(on);
+
             byte[] d=new byte[br.available()];
             br.read(d);
             br.close();
-            page = new String(d);
+            page = new String(d,CharsetUtil.UTF_8);
             Matcher m = pattern.matcher(page);
             List<String> imports=new LinkedList();
             int i=0;
