@@ -36,9 +36,13 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         long d=System.currentTimeMillis();
-        new DreamPhaseDetector().start();
-        new Thread(new TimeController()).start();
-        updateTime();
+        Globals.isIDE=args.length>0 && args[0].equalsIgnoreCase("ide-mode");
+        if(!Globals.isIDE) {
+            new DreamPhaseDetector().start();
+            new Thread(new TimeController()).start();
+            updateTime();
+        }else
+            System.out.println("Starting in IDE mode");
         System.out.println("Wake up, NEO!");
 
         Reflections reflections = new Reflections(ClasspathHelper.forPackage("net.xcodersteam.lemoprint"),
@@ -82,7 +86,7 @@ public class Main {
                     .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
 
             // Bind and start to accept incoming connections.
-            f = b.bind(80).sync(); // (7)
+            f = b.bind(Globals.isIDE?8080:80).sync(); // (7)
 
             log.info("Server started up. In "+(System.currentTimeMillis()-d)+"ms");
             // Wait until the server socket is closed.
